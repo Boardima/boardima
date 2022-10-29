@@ -28,9 +28,11 @@ function LandingMain() {
 
                 </Typography>
 
+                
                 <Typography sx={{
-                    color: "#F0D90D",
-                    fontSize: "25pt",
+                    color: "#000000",
+                    fontSize: "26pt",
+                    fontWeight:"bold",
                     }}
                 >
                     Use our platform to find the perfect boarding<br></br>
