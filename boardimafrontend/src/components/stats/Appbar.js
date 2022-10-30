@@ -13,10 +13,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { bottomNavigationActionClasses } from '@mui/material';
 
 const drawerWidth = 240;
-const navItems = [{ name: 'Sign Up', id: 0 }, { name: 'Sign In', id: 1 }];
+const navItems = [{ name: 'Sign Up', id: 0, active: 1 }, { name: 'Sign In', id: 1, active: 2 }];
 
 function Appbar(props) {
 
@@ -31,11 +32,17 @@ function Appbar(props) {
 
     const changeButton = (id) => {
 
-        if(id == 0){
+        if (id == 0) {
             navigate('/signup')
-        }else{
+        } else {
             navigate('/signin')
         }
+
+    }
+
+    const changeHome = () => {
+
+        navigate('/')
 
     }
 
@@ -60,8 +67,8 @@ function Appbar(props) {
     const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
-        <Box sx={{ display: 'flex'}}>
-            <AppBar component="nav" sx={{background: '#000000'}}>
+        <Box sx={{ display: 'flex' }}>
+            <AppBar component="nav" sx={{ background: '#000000' }}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -75,15 +82,23 @@ function Appbar(props) {
                     <Typography
                         variant="h6"
                         component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } , pl:'30px', fontSize:'18pt', fontWeight:'bold'}}
+                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, pl: '30px', fontSize: '18pt', fontWeight: 'bold' }}
                     >
-                        Boardima
+                        <Button onClick={() => changeHome()} sx={{
+                            color:"#ffffff",
+                            fontSize:"16pt"
+                        }}>Boardima</Button>
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         {navItems.map((obj) => (
-                            <Button key={obj.name} sx={{ color: '#000',background:'#F0D90D', ml:'10px', pl:'20px',pr:'20px',"&:hover": {
-                                color:'#F0D90D',
-                              },}}  onClick={() => changeButton(obj.id)}>
+                            <Button className='btn' key={obj.name}
+                                sx={{
+                                    color: props.value == obj.active ? '#F0D90D' : '#000',
+                                    background: props.value == obj.active ? '#000' : '#F0D90D',
+                                    ml: '10px', pl: '20px', pr: '20px', "&:hover": {
+                                        color: '#F0D90D',
+                                    },
+                                }} onClick={() => changeButton(obj.id)}>
                                 {obj.name}
                             </Button>
                         ))}

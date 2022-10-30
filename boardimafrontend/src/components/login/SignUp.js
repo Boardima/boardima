@@ -1,6 +1,11 @@
+import { Box } from "@mui/material";
+import Appbar from "../stats/Appbar";
+
 function SignUp() {
   return (
-    <h1>sign up</h1>
+    <Box>
+      <Appbar value={1}/>
+    </Box>
   );
 }
 

@@ -2,13 +2,15 @@ import { Opacity } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
 import { textAlign } from "@mui/system";
 import Appbar from "../stats/Appbar";
+import Footer from "../stats/Footer";
+import Content from "./Content";
 import './landingmain.css'
 
 function LandingMain() {
     return (
         <Box>
 
-            <Appbar />
+            <Appbar value={0} />
 
             <div className="bgImage"></div>
 
@@ -28,9 +30,11 @@ function LandingMain() {
 
                 </Typography>
 
+                
                 <Typography sx={{
-                    color: "#F0D90D",
-                    fontSize: "25pt",
+                    color: "#ffffff",
+                    fontSize: "24pt",
+                    fontWeight:"regular",
                     }}
                 >
                     Use our platform to find the perfect boarding<br></br>
@@ -40,6 +44,8 @@ function LandingMain() {
 
             </div>
 
+            <Content />
+            <Footer />
 
         </Box>
 
