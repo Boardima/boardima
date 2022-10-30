@@ -29,7 +29,7 @@
     min-width: 300px;
     max-height: 700px;
     width: 35%;
-    height: 65%;
+    height: 70%;
     margin: auto;
     background-color: #FFFFFF;
     border-radius: 25px;
@@ -40,6 +40,7 @@
     padding: 2rem 0;
     margin: 0;
     font-size: 2rem;
+    font-weight: 500;
 }
 
 .row {
@@ -96,6 +97,7 @@
     border: 0px;
     cursor: pointer;
     transition: opacity 0.25s ease-out;
+    font-weight: 400;
 }
 
 .row button:hover {
