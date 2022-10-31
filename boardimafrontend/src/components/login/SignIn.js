@@ -1,57 +1,42 @@
-import { Box } from "@mui/material";
+import * as React from 'react';
+import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Input from '@mui/material/Input';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
 import Appbar from "../stats/Appbar";
 import './signin.css'
 
-const FormHeader = props => (
-    <h2 id="headerTitle">{props.title}</h2>
-);
-
-
-const Form = props => (
-    <div>
-        <FormInput description="Username" placeholder="Enter your username" type="text" />
-        <FormInput description="Password" placeholder="Enter your password" type="password" />
-        <FormButton title="Log in" />
-    </div>
-);
-
-const FormButton = props => (
-    <div id="button" class="row">
-        <button>{props.title}</button>
-    </div>
-);
-
-const FormInput = props => (
-    <div class="row">
-        <label>{props.description}</label>
-        <input type={props.type} placeholder={props.placeholder} />
-    </div>
-);
-
-const OtherMethods = props => (
-    <div id="alternativeLogin">
-        <label>Or sign in with:</label>
-        <div id="iconGroup">
-            <Facebook />
-            <Twitter />
-            <Google />
-        </div>
-    </div>
-);
-
-const Facebook = props => (
-    <a href="#" id="facebookIcon"></a>
-);
-
-const Twitter = props => (
-    <a href="#" id="twitterIcon"></a>
-);
-
-const Google = props => (
-    <a href="#" id="googleIcon"></a>
-);
 
 function SignIn() {
+
+    const [values, setValues] = React.useState({
+        amount: '',
+        password: '',
+        weight: '',
+        weightRange: '',
+        showPassword: false,
+    });
+
+    const handleChange = (prop) => (event) => {
+        setValues({ ...values, [prop]: event.target.value });
+    };
+
+
+    const handleClickShowPassword = () => {
+        setValues({
+            ...values,
+            showPassword: !values.showPassword,
+        });
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
+
     return (
 
         <Box>
@@ -60,10 +45,42 @@ function SignIn() {
             <div className="bgImagesignin"></div>
 
 
-            <div id="loginform" className="contentsignin">
-                <FormHeader title="Login" />
-                <Form />
-                <OtherMethods />
+            <div className="contentsignup">
+
+                <div className="signinform">
+
+                    <Typography className='signintitle' sx={{fontWeight:"bold", fontSize:"16pt"}}>BOARDIMA</Typography>
+                    <Typography className='signintitle'>Sign Up</Typography>
+
+                    <form>
+                        <Box className='signininputf'><TextField className='signintextf' id="standard-basic" label="Username" variant="standard" /></Box>
+                        <Box className='signininputf'>
+                            <FormControl label="Password" variant="standard" className='signuptextf'>
+                                <InputLabel htmlFor="standard-adornment-password" >Password</InputLabel>
+                                <Input
+                                    label="Password"
+                                    id="standard-adornment-password"
+                                    type={values.showPassword ? 'text' : 'password'}
+                                    value={values.password}
+                                    onChange={handleChange('password')}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                            >
+                                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                />
+                            </FormControl>
+                        </Box>
+                        <Button variant="contained" className='signinbtn'><Typography>Sign In</Typography></Button>
+                    </form>
+
+                </div>
             </div>
 
 

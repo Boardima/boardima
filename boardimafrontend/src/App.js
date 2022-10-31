@@ -5,6 +5,8 @@ import SignUp from './components/login/SignUp';
 import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 import { createTheme, ThemeProvider } from "@mui/material";
 import StyledEngineProvider from "@mui/material/StyledEngineProvider";
+import UserHome from './components/userHome/UserHome';
+import UserAccomadation from './components/userAccomadation/UserAccomadation';
 
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
               <Route path="/" element={<LandingMain />}></Route>
               <Route path="/signin" element={<SignIn />}></Route>
               <Route path="/signup" element={<SignUp />}></Route>
+              <Route path='/userhome' element={<UserHome />}></Route>
+              <Route path='/useraccomadation' element={<UserAccomadation />}></Route>
             </Routes>
 
           </BrowserRouter>
