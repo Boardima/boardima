@@ -14,7 +14,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import { bottomNavigationActionClasses } from '@mui/material';
+
 
 const drawerWidth = 240;
 const navItems = [{ name: 'Sign Up', id: 0, active: 1 }, { name: 'Sign In', id: 1, active: 2 }];
@@ -86,7 +86,8 @@ function Appbar(props) {
                     >
                         <Button onClick={() => changeHome()} sx={{
                             color:"#ffffff",
-                            fontSize:"16pt"
+                            fontSize:"16pt",
+                            letterSpacing: '.3rem',
                         }}>Boardima</Button>
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
