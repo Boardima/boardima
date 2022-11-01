@@ -1,6 +1,6 @@
 import UserAppbar from "../stats/UserAppbar";
 
-function UserAccomadation() {
+function UserFeedback() {
     return (
         <div>
 
@@ -13,4 +13,4 @@ function UserAccomadation() {
 
 }
 
-export default UserAccomadation;
+export default UserFeedback;

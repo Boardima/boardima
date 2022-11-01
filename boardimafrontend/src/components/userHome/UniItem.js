@@ -1,15 +1,14 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
+import UniCard from './UniCard';
 
 function Item(props) {
     const { sx, ...other } = props;
     return (
         <Box
             sx={{
-                p: 1,
-                m: 1,
-                bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : 'grey.100'),
+                m:5,
                 color: (theme) => (theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800'),
                 border: '1px solid',
                 borderColor: (theme) =>
@@ -45,15 +44,12 @@ function UniItem() {
                 sx={{
                     display: 'flex',
                     justifyContent: 'space-evenly',
-                    p: 1,
-                    m: 1,
-                    bgcolor: 'background.paper',
                     borderRadius: 1,
                 }}
             >
-                <Item>Item 1</Item>
-                <Item>Item 2</Item>
-                <Item>Item 3</Item>
+                <Item><UniCard uniName={"University of Colombo"} uniAddress={"College House 94, Cumaratunga Munidasa Mw Colombo 03"} uniImage={"./assets/uoc-logo.png"}/></Item>
+                <Item><UniCard uniName={"University of Moratuwa"} uniAddress={"Bandaranayake Mawatha, Moratuwa 10400"} uniImage={"./assets/uom-logo.png"}/></Item>
+                <Item><UniCard uniName={"University of Sri Jayawardanapura"} uniAddress={"Gangodawila, Nugegoda"} uniImage={"./assets/usj-logo.png"}/></Item>
             </Box>
 
         </div>
