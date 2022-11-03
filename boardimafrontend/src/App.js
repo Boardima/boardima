@@ -7,6 +7,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import StyledEngineProvider from "@mui/material/StyledEngineProvider";
 import UserHome from './components/userHome/UserHome';
 import UserFeedback from './components/userFeedback/UserFeedback';
+import FilterMain from './components/homeUniFilter/FilterMain';
 
 
 function App() {
@@ -34,7 +35,8 @@ function App() {
               <Route path="/signin" element={<SignIn />}></Route>
               <Route path="/signup" element={<SignUp />}></Route>
               <Route path='/userhome' element={<UserHome />}></Route>
-              <Route path='/useraccomadation' element={<UserFeedback />}></Route>
+              <Route path='/submitfeedback' element={<UserFeedback />}></Route>
+              <Route path='/filterhome' element={<FilterMain />}></Route>
             </Routes>
 
           </BrowserRouter>
