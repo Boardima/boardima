@@ -46,7 +46,7 @@ function UserAppBar(props) {
         if (id == 0) {
             navigate('/userhome')
         } else {
-            navigate('/useraccomadation')
+            navigate('/submitfeedback')
         }
 
     }
