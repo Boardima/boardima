@@ -7,7 +7,7 @@ import { Button, CardActionArea, CardActions, Box } from '@mui/material';
 
 export default function UniCard(props) {
     return (
-        <Box sx={{ width: 250, boderColor: "2px solid #FFFFFF"}}>
+        <Box sx={{ width: 270, boderColor: "2px solid #FFFFFF"}}>
             <CardActionArea>
                 <CardMedia
                     component="img"
@@ -15,7 +15,7 @@ export default function UniCard(props) {
                     alt="green iguana"
                     sx={{ width: "250px", height: "150px", objectFit: "contain", pt:2 }}
                 />
-                <CardContent sx={{ color: "#FFFFFF", background: "#000000", mt: 2, height:"140px" }}>
+                <CardContent sx={{ color: "#FFFFFF", background: "#000000", mt: 2, height:"170px" }}>
                     <Typography variant='h6' sx={{color:"#F0D90D", mb:2}}>
                         {props.uniName}
                     </Typography>
