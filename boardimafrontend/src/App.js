@@ -8,6 +8,8 @@ import StyledEngineProvider from "@mui/material/StyledEngineProvider";
 import UserHome from './components/userHome/UserHome';
 import UserFeedback from './components/userFeedback/UserFeedback';
 import FilterMain from './components/homeUniFilter/FilterMain';
+import Home from './components/adminHome/Home';
+
 
 
 function App() {
@@ -37,6 +39,7 @@ function App() {
               <Route path='/userhome' element={<UserHome />}></Route>
               <Route path='/submitfeedback' element={<UserFeedback />}></Route>
               <Route path='/filterhome' element={<FilterMain />}></Route>
+              <Route path='/adminhome' element={<Home />}></Route>
             </Routes>
 
           </BrowserRouter>

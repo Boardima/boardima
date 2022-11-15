@@ -1,0 +1,32 @@
+.leftbox{
+    background-color: white;
+    width: 280px;
+    height: 130px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+    text-align: center;
+    padding: 20px;
+}
+
+.count{
+    margin-top: 20px;
+    font-size: 20pt;
+    font-weight: 500;
+    color: rgb(255, 81, 0);
+}
+
+.rightbox{
+    background-color: white;
+    width: 500px;
+    height: 570px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+}
+
+.h-chart{
+    font-size: 18pt;
+    font-weight: 500;
+    color: rgb(255, 115, 0);
+}
+
