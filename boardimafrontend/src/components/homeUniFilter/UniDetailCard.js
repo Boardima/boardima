@@ -20,9 +20,33 @@ function UniDetailCard() {
     rowLength: 100,
   });
   const rows = [
-    { id: 1, col1: "Hello", col2: "World",col3:"077959617" },
-    { id: 2, col1: "DataGridPro", col2: "is Awesome" },
-    { id: 3, col1: "MUI", col2: "is Amazing" },
+    {
+      id: 1,
+      col1: "Owner1",
+      col2: "Address1",
+      col3: "077959617",
+      col4: "Male",
+      col5: "This is a boardim house for boys...",
+      col6: "Available",
+    },
+    {
+      id: 2,
+      col1: "Owner2",
+      col2: "Address2",
+      col3: "0712544757",
+      col4: "Male",
+      col5: "This is a boardim house for boys...",
+      col6: "Available",
+    },
+    {
+      id: 3,
+      col1: "Owner3",
+      col2: "Address3",
+      col3: "076884757",
+      col4: "Female",
+      col5: "This is a boardim house for girl...",
+      col6: "Available",
+    },
   ];
   const columns = [
     {
