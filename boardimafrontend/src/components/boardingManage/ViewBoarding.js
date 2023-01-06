@@ -4,16 +4,45 @@ import { useDemoData } from '@mui/x-data-grid-generator';
 import ViewPopup from '../homeUniFilter/ViewPopup';
 import EditPopup from './EditPopup';
 import DeletePopup from './DeletePopup';
+import Axios from "axios";
 
-const VISIBLE_FIELDS = ['name', 'rating', 'country', 'dateCreated', 'isAdmin'];
+// const VISIBLE_FIELDS = ['name', 'rating', 'country', 'dateCreated', 'isAdmin'];
 
-function ViewBoarding() {
+function ViewBoarding(props) {
 
-    const { data } = useDemoData({
-        dataSet: 'Employee',
-        visibleFields: VISIBLE_FIELDS,
-        rowLength: 100,
-    });
+    // const { data } = useDemoData({
+    //     // dataSet: '',
+    //     // visibleFields: VISIBLE_FIELDS,
+    //     rowLength: 100,
+    // });
+
+    const rows = [
+        {
+            id: 1,
+            col1: 'MUI',
+            col2: 28000,
+            col3: 28000,
+            col4: 28000,
+            col5: 28000,
+            col6: 28000,
+            col7: 28000,
+            col8: 28000,
+            col9: 28000,
+        },
+        {
+            id: 2,
+            id: 1,
+            col1: 'MUI',
+            col2: 28000,
+            col3: 28000,
+            col4: 28000,
+            col5: 28000,
+            col6: 28000,
+            col7: 28000,
+            col8: 28000,
+            col9: 28000,
+        },
+    ];
 
     const columns = [
         {
@@ -123,10 +152,28 @@ function ViewBoarding() {
         },
     ];
 
+    const [boardingData, setboardingData] = React.useState([{}])
+
+
+    React.useEffect(() => {
+        Axios.get("http://localhost:5000/api/boardim")
+            .then((response) => {
+                console.log(response.data.data)
+                setboardingData(response.data.data)
+            }).catch(err=>console.log(err))
+    }, []);
+
+    const arr = boardingData.map((data, index) => {
+        return(
+            <label>{data.boardimID}</label>
+        )
+    })
+
     return (
+
         <div style={{ height: 510, width: '100%' }}>
 
-            <DataGrid {...data}
+            <DataGrid
                 components={{
                     Toolbar: () => {
                         return (
@@ -136,12 +183,14 @@ function ViewBoarding() {
                         )
                     }
                 }}
-                getRowHeight={() => '130px'} 
+                getRowHeight={() => '130px'}
                 columns={columns}
+                rows={rows}
                 sx={{
                     border: '1px solid #FFFFFF',
                 }}
             />
+            {arr}
         </div>
     );
 }
