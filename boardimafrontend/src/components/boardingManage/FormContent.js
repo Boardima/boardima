@@ -4,6 +4,11 @@ import './formcontent.css';
 import styled from '@emotion/styled';
 import { green, blue } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import axios from "axios";
 
 const ColorButton1 = styled(Button)(({ theme }) => ({
     color: "#ffffff",
@@ -31,7 +36,32 @@ function FormContent() {
 
     const navigateToBoardingManage = () => {
         navigate('/boardingManage');
-      };
+    };
+
+    const [data, setData] = useState({
+        boardimID: "",
+        address: ""
+    });
+
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setData({
+            ...data,
+            [e.target.name]: value
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const userData = {
+            boardimID: data.boardimID,
+            address: data.address
+        };
+        axios.post("http://localhost:5000/api/boardim/", userData).then((response) => {
+            console.log(response.status);
+            console.log(response.data.token);
+        });
+    };
 
     return (
 
@@ -50,7 +80,37 @@ function FormContent() {
 
                     <div className='form-group'>
                         <label className='form-label'>Address</label>
-                        <input type="text" required className='form-input'></input>
+                        <input
+                            type="text" required
+                            className='form-input'
+                            name="address"
+                            value={data.address}
+                            onChange={handleChange}>
+                        </input>
+                    </div>
+
+                    <div className='form-group'>
+                        <Accordion >
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <label>Geographic Coordinate</label>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <div className='form-group-coordinate'>
+                                    <div >
+                                        <label className='form-label'>Latitude</label><br></br>
+                                        <input type="text" required className='form-input-coordinate'></input>
+                                    </div>
+                                    <div >
+                                        <label className='form-label'>Longitude</label><br></br>
+                                        <input type="text" required className='form-input-coordinate'></input>
+                                    </div>
+                                </div>
+                            </AccordionDetails>
+                        </Accordion>
                     </div>
 
                     <div className='form-group-radio'>
@@ -107,10 +167,43 @@ function FormContent() {
 
                     </div>
 
+                    {/* <label htmlFor="boardimaID">
+                        boardimID
+                        <input
+                            type="text"
+                            name="boardimID"
+                            value={data.boardimID}
+                            onChange={handleChange}
+                        />
+                    </label>
+                    <label htmlFor="address">
+                        Address
+                        <input
+                            type="text"
+                            name="address"
+                            value={data.address}
+                            onChange={handleChange}
+                        />
+                    </label> */}
+                    {/* <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                        >
+                            <Typography>Accordion 1</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                                malesuada lacus ex, sit amet blandit leo lobortis eget.
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion> */}
 
                     <div className='form-group-button'>
                         <ColorButton2 onClick={navigateToBoardingManage}>CLOSE</ColorButton2>
-                        <ColorButton1>SAVE</ColorButton1>
+                        <ColorButton1 onClick={handleSubmit}>SAVE</ColorButton1>
                     </div>
 
                 </div>
