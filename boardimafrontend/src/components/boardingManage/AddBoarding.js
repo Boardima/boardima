@@ -2,8 +2,9 @@ import { green } from '@mui/material/colors';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
-  
+
 const ColorButton = styled(Button)(({ theme }) => ({
     color: "#ffffff",
     textTransform: "none",
@@ -14,10 +15,19 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 function AddBoarding() {
+
+    const navigate = useNavigate()
+
+    const linkBoardingForm = () => {
+
+        navigate('/boardingform')
+
+    }
+
     return (
         <div>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: '40px' }}>
-                <ColorButton >New Boarding</ColorButton>
+                <ColorButton onClick={() => linkBoardingForm()}>New Boarding</ColorButton>
             </Box>
         </div>
     );
