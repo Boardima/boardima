@@ -10,6 +10,7 @@ import UserFeedback from './components/userFeedback/UserFeedback';
 import FilterMain from './components/homeUniFilter/FilterMain';
 import Home from './components/adminHome/Home';
 import BoardingManage from './components/boardingManage/BoardingManage';
+import BoardingForm from './components/boardingManage/BoardingForm';
 
 
 
@@ -42,6 +43,7 @@ function App() {
               <Route path='/filterhome' element={<FilterMain />}></Route>
               <Route path='/adminhome' element={<Home />}></Route>
               <Route path='/boardingManage' element={<BoardingManage />}></Route>
+              <Route path='/boardingform' element={<BoardingForm />}></Route>
             </Routes>
 
           </BrowserRouter>

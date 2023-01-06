@@ -3,6 +3,7 @@ import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import { useDemoData } from '@mui/x-data-grid-generator';
 import ViewPopup from '../homeUniFilter/ViewPopup';
 import EditPopup from './EditPopup';
+import DeletePopup from './DeletePopup';
 
 const VISIBLE_FIELDS = ['name', 'rating', 'country', 'dateCreated', 'isAdmin'];
 
@@ -100,6 +101,23 @@ function ViewBoarding() {
                 const onClick = (e) => { }
                 return (
                     <EditPopup userId={params.row.id} />
+                );
+            },
+        },
+        {
+            field: "col12",
+            headerName: "Delete",
+            headerClassName: "header-class-name",
+            headerAlign: "center",
+            width: 100,
+            align: "center",
+            disableColumnMenu: true,
+            sortable: false,
+            renderCell: (params) => {
+                console.log(params.row)
+                const onClick = (e) => { }
+                return (
+                    <DeletePopup userId={params.row.id} />
                 );
             },
         },

@@ -44,9 +44,9 @@ function AdminAppBar(props) {
     const changeButton = (id) => {
 
         if (id == 0) {
-            navigate('/userhome')
+            navigate('/adminhome')
         } else if (id == 1) {
-            navigate('/submitfeedback')
+            navigate('/boardingManage')
         } else {
             navigate('/')
         }
