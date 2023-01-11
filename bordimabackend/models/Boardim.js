@@ -5,21 +5,41 @@ const Schema = mongoose.Schema;
 
 const BoardimSchema = new Schema({
   boardimID: {
-    type: String,
-    required: [true, "Please add a boardim ID"],
-    unique: true,
-    trim: true,
-    maxlength: [10, "Store ID must be less than 10 characters"],
+    type: Number,
   },
   ownerName: String,
   address: {
     type: String,
     required: [true, "Please add address"],
   },
+  gender: {
+    type: String,
+    enum: ['Male', 'Female'],
+    default: 'None',
+  },
   contactNumber: String,
-  gender: Number,
   description: String,
-  status: Number,
+  status: {
+    type: String,
+    enum: ['Available', 'Unavailable'],
+    default: 'Available',
+  },
+  busUOC: {
+    type: String,
+  },
+  busUOM: {
+    type: String,
+  },
+  busUSJ: {
+    type: String,
+  },
+  nearUni: {
+    type: Array,
+  },
+  image: {
+    type: [String],
+    validate:(v)=>Array.isArray(v) && v.length>0,
+  },
   location: {
     type: {
       type: String,
@@ -37,7 +57,34 @@ const BoardimSchema = new Schema({
   },
 });
 
+const CounterSchema = {
+  id: {
+    type: String
+  },
+  seq: {
+    type: Number
+  }
+}
+
+const countermodel = mongoose.model("Counter", CounterSchema);
+
 BoardimSchema.pre("save", async function (next) {
+
+  // update counter
+  countermodel.findOneAndUpdate(
+    { id: "autoval" },
+    { "$inc": { "seq": 1 } },
+    { new: true }, (err, cd) => {
+      let seqId;
+      if (cd == null) {
+        const newval = new countermodel({ id: "autoval", seq: 1 })
+        newval.save()
+        seqId = 1
+      } else {
+        seqId = cd.seq;
+      }
+      this.boardimID = seqId
+    });
   const loc = await geocoder.geocode({
     address: this.address,
     country: "Sri Lanka",

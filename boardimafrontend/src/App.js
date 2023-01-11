@@ -13,7 +13,6 @@ import BoardingManage from './components/boardingManage/BoardingManage';
 import BoardingForm from './components/boardingManage/BoardingForm';
 
 
-
 function App() {
 
   const theme = createTheme({
