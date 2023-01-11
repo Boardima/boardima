@@ -46,7 +46,7 @@ function ViewBoarding(props) {
 
     const columns = [
         {
-            field: "col1",
+            field: "ownerName",
             headerName: "Owner Name",
             headerClassName: "header-class-name",
             width: 205,

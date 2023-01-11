@@ -7,7 +7,7 @@ body{
     margin: auto;
     margin-top: 20px;
     background: #ffffff;
-    padding: 50px 100px 50px 100px;
+    padding: 25px 100px 50px 100px;
     border-radius: 10px;
 }
 
@@ -18,7 +18,7 @@ body{
 }
 
 .form-group{
-    padding-top: 35px;
+    padding-top: 30px;
     display: grid;
 }
 
@@ -31,6 +31,12 @@ body{
     padding-top: 35px;
 }
 
+.image-group{
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
 .form-label{
     padding-bottom: 5px;
 }
@@ -40,6 +46,10 @@ body{
     width: 500px;
     border-radius: 5px;
     border: 1px solid #a09e9e;
+}
+
+.form-input-image{
+    padding-top: 10px;
 }
 
 .form-input-coordinate{
@@ -57,17 +67,26 @@ body{
 
 .form-input:focus{
     outline: none !important;
-    border: 2px solid  rgb(206, 103, 19);
+    border: 2px solid  rgb(232, 213, 70);
+}
+
+.form-input-coordinate:focus{
+    outline: none !important;
+    border: 2px solid  rgb(232, 213, 70);
 }
 
 .form-group-button{
-    margin-top: 50px;
+    margin-top: 70px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .form-group-radio-content{
     display: flex;
     justify-content: space-between;
     width: 400px;
+}
+
+.radio-button{
+    accent-color: rgb(23, 23, 22);
 }
