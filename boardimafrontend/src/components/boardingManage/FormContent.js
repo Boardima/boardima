@@ -8,6 +8,10 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Grid, Box, Card, CardActionArea, CardActions, CardMedia } from '@mui/material';
+import Tabs, { tabsClasses } from '@mui/material/Tabs';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
 import axios from "axios";
 import { storage } from '../firebase/firebase'
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
@@ -54,6 +58,12 @@ function FormContent() {
         navigate('/boardingManage');
     };
 
+    const [value, setValue] = React.useState(0);
+
+    const handleChangeArrow = (event, newValue) => {
+        setValue(newValue);
+    };
+
     const [uni, setUni] = useState([]);
 
     const [imageUpload, setImageUpload] = useState(null);
@@ -83,6 +93,7 @@ function FormContent() {
     // }, []);
 
     const [data, setData] = useState({
+        boardimID: "",
         ownerName: "",
         address: "",
         gender: "",
@@ -108,6 +119,7 @@ function FormContent() {
         e.preventDefault();
         setUni([data.nearUniUoc + "," + data.nearUniUom + "," + data.nearUniUsj])
         const userData = {
+            boardimID: data.boardimID,
             ownerName: data.ownerName,
             address: data.address,
             gender: data.gender,
@@ -137,6 +149,15 @@ function FormContent() {
                 <h2 className='form-headline'>Add a New Boarding Place</h2>
 
                 <div className='feedback-form'>
+
+                    <div className='form-group'>
+                        <label className='form-label'>Owner ID</label>
+                        <input
+                            type="text" required
+                            className='form-input'
+                            name="boardimID"
+                            onChange={handleChange}></input>
+                    </div>
 
                     <div className='form-group'>
                         <label className='form-label'>Owner Name</label>
@@ -294,11 +315,51 @@ function FormContent() {
                             ></input>
                             <ColorButton3 onClick={uploadImage}>Upload Image</ColorButton3>
                         </div>
-                        {imageList.map((url) => {
-                            return <img src={url}></img>
-                        })}
-
                     </div>
+                    <Box sx={{
+                        margin: 'auto',
+                        flexGrow: 1,
+                        maxWidth: { xs: 480, sm: 370 },
+                        display: 'grid',
+                        bgcolor: 'background.paper',
+                    }}>
+                        <Tabs
+                            onChange={handleChangeArrow}
+                            variant="scrollable"
+                            scrollButtons
+                            aria-label="visible arrows tabs example"
+                            sx={{
+                                [`& .${tabsClasses.scrollButtons}`]: {
+                                    '&.Mui-disabled': { opacity: 0.3 },
+                                },
+                            }}
+                        >
+                            {imageList.map((url) => {
+                                return (
+                                    <Grid item xs={3}>
+                                        <Box sx={{ p: 1, m: 1 }}>
+                                            <Card sx={{ width: 250, }}>
+                                                <CardActionArea>
+                                                    <CardMedia
+                                                        component="img"
+                                                        image={url}
+                                                        alt="green iguana"
+                                                        sx={{ width: "250px", height: "150px", objectFit: "contain", pt: 2 }}
+                                                    />
+                                                </CardActionArea>
+                                                <CardActions sx={{ m: 0, p: 0 }}>
+                                                    <IconButton>
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </CardActions>
+                                            </Card>
+                                        </Box>
+                                    </Grid>
+                                )
+                            })}
+                        </Tabs>
+                    </Box>
+                    {/* </div> */}
 
                     <div className='form-group-button'>
                         <ColorButton2 onClick={navigateToBoardingManage}>CLOSE</ColorButton2>
