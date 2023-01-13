@@ -6,7 +6,7 @@ import EditPopup from './EditPopup';
 import DeletePopup from './DeletePopup';
 import Axios from "axios";
 
-// const VISIBLE_FIELDS = ['name', 'rating', 'country', 'dateCreated', 'isAdmin'];
+const VISIBLE_FIELDS = ['Owner Name'];
 
 function ViewBoarding(props) {
 
@@ -16,33 +16,33 @@ function ViewBoarding(props) {
     //     rowLength: 100,
     // });
 
-    const rows = [
-        {
-            id: 1,
-            col1: 'MUI',
-            col2: 28000,
-            col3: 28000,
-            col4: 28000,
-            col5: 28000,
-            col6: 28000,
-            col7: 28000,
-            col8: 28000,
-            col9: 28000,
-        },
-        {
-            id: 2,
-            id: 1,
-            col1: 'MUI',
-            col2: 28000,
-            col3: 28000,
-            col4: 28000,
-            col5: 28000,
-            col6: 28000,
-            col7: 28000,
-            col8: 28000,
-            col9: 28000,
-        },
-    ];
+    // const rows = [
+    //     {
+    //         id: 1,
+    //         col1: 'MUI',
+    //         col2: 28000,
+    //         col3: 28000,
+    //         col4: 28000,
+    //         col5: 28000,
+    //         col6: 28000,
+    //         col7: 28000,
+    //         col8: 28000,
+    //         col9: 28000,
+    //     },
+    //     {
+    //         id: 2,
+    //         id: 1,
+    //         col1: 'MUI',
+    //         col2: 28000,
+    //         col3: 28000,
+    //         col4: 28000,
+    //         col5: 28000,
+    //         col6: 28000,
+    //         col7: 28000,
+    //         col8: 28000,
+    //         col9: 28000,
+    //     },
+    // ];
 
     const columns = [
         {
@@ -52,49 +52,49 @@ function ViewBoarding(props) {
             width: 205,
         },
         {
-            field: "col2",
+            field: "address",
             headerName: "Address",
             headerClassName: "header-class-name",
             width: 222,
         },
         {
-            field: "col3",
-            headerName: "Contact No",
-            headerClassName: "header-class-name",
-            width: 140,
-        },
-        {
-            field: "col4",
+            field: "gender",
             headerName: "Gender",
             headerClassName: "header-class-name",
             width: 90,
         },
         {
-            field: "col5",
-            headerName: "Description",
+            field: "contactNumber",
+            headerName: "Contac tNumber",
             headerClassName: "header-class-name",
-            width: 300,
+            width: 140,
         },
         {
-            field: "col6",
+            field: "description",
+            headerName: "Description",
+            headerClassName: "header-class-name",
+            width: 290,
+        },
+        {
+            field: "busUOC",
             headerName: "Bus Route to UOC",
             headerClassName: "header-class-name",
             width: 300,
         },
         {
-            field: "col7",
+            field: "busUOM",
             headerName: "Bus Route to UOM",
             headerClassName: "header-class-name",
             width: 300,
         },
         {
-            field: "col8",
+            field: "busUSJ",
             headerName: "Bus Route to USJ",
             headerClassName: "header-class-name",
             width: 300,
         },
         {
-            field: "col9",
+            field: "status",
             headerName: "Status",
             headerClassName: "header-class-name",
             width: 90,
@@ -104,7 +104,7 @@ function ViewBoarding(props) {
             headerName: "View",
             headerClassName: "header-class-name",
             headerAlign: "center",
-            width: 100,
+            width: 97,
             align: "center",
             disableColumnMenu: true,
             sortable: false,
@@ -112,7 +112,7 @@ function ViewBoarding(props) {
                 console.log(params.row)
                 const onClick = (e) => { }
                 return (
-                    <ViewPopup userId={params.row.id} />
+                    <ViewPopup images={params.row.image} />
                 );
             },
         },
@@ -121,7 +121,7 @@ function ViewBoarding(props) {
             headerName: "Edit",
             headerClassName: "header-class-name",
             headerAlign: "center",
-            width: 100,
+            width: 97,
             align: "center",
             disableColumnMenu: true,
             sortable: false,
@@ -138,7 +138,7 @@ function ViewBoarding(props) {
             headerName: "Delete",
             headerClassName: "header-class-name",
             headerAlign: "center",
-            width: 100,
+            width: 97,
             align: "center",
             disableColumnMenu: true,
             sortable: false,
@@ -153,21 +153,29 @@ function ViewBoarding(props) {
     ];
 
     const [boardingData, setboardingData] = React.useState([{}])
-
+    const [tableData, setTableData] = React.useState([]);
+    let tableRows = [];
 
     React.useEffect(() => {
         Axios.get("http://localhost:5000/api/boardim")
             .then((response) => {
-                console.log(response.data.data)
-                setboardingData(response.data.data)
-            }).catch(err=>console.log(err))
+                response.data.data.map((row) => {
+                    tableRows.push({
+                        id: row.boardimID,
+                        ownerName: row.ownerName,
+                        gender: row.gender,
+                        contactNumber: row.contactNumber,
+                        description: row.description,
+                        status: row.status,
+                        busUOC: row.busUOC,
+                        busUOM: row.busUOM,
+                        busUSJ: row.busUSJ,
+                        image: row.image
+                    });
+                });
+                setTableData(tableRows);
+            });
     }, []);
-
-    const arr = boardingData.map((data, index) => {
-        return(
-            <label>{data.boardimID}</label>
-        )
-    })
 
     return (
 
@@ -185,12 +193,17 @@ function ViewBoarding(props) {
                 }}
                 getRowHeight={() => '130px'}
                 columns={columns}
-                rows={rows}
+                columnVisibilityModel={{
+                    // Hide columns status and traderName, the other columns will remain visible
+                    busUOC: false,
+                    busUOM: false,
+                    busUSJ: false,
+                  }}
+                rows={tableData}
                 sx={{
                     border: '1px solid #FFFFFF',
                 }}
             />
-            {arr}
         </div>
     );
 }

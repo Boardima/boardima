@@ -5,7 +5,11 @@ const Schema = mongoose.Schema;
 
 const BoardimSchema = new Schema({
   boardimID: {
-    type: Number,
+    type: String,
+    required: [true, "Please add a boardim ID"],
+    unique: true,
+    trim: true,
+    maxlength: [10, "Store ID must be less than 10 characters"],
   },
   ownerName: String,
   address: {
@@ -57,34 +61,9 @@ const BoardimSchema = new Schema({
   },
 });
 
-const CounterSchema = {
-  id: {
-    type: String
-  },
-  seq: {
-    type: Number
-  }
-}
-
-const countermodel = mongoose.model("Counter", CounterSchema);
 
 BoardimSchema.pre("save", async function (next) {
 
-  // update counter
-  countermodel.findOneAndUpdate(
-    { id: "autoval" },
-    { "$inc": { "seq": 1 } },
-    { new: true }, (err, cd) => {
-      let seqId;
-      if (cd == null) {
-        const newval = new countermodel({ id: "autoval", seq: 1 })
-        newval.save()
-        seqId = 1
-      } else {
-        seqId = cd.seq;
-      }
-      this.boardimID = seqId
-    });
   const loc = await geocoder.geocode({
     address: this.address,
     country: "Sri Lanka",
@@ -102,6 +81,7 @@ BoardimSchema.pre("save", async function (next) {
     formattedAddress: loc[0].formattedAddress,
   };
   this.address = undefined;
+
   next();
 });
 
