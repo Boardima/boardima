@@ -49,12 +49,24 @@ function SignUp() {
           <Typography className='signuptitle'>Sign Up</Typography>
 
           <form>
-            <Box className='signupinputf'><TextField className='signuptextf' id="standard-basic" label="First Name" variant="standard" /></Box>
-            <Box className='signupinputf'><TextField className='signuptextf' id="standard-basic" label="Last Name" variant="standard" /></Box>
-            <Box className='signupinputf'><TextField className='signuptextf' id="standard-basic" label="Address" variant="standard" /></Box>
-            <Box className='signupinputf'><TextField className='signuptextf' id="standard-basic" label="Gender" variant="standard" /></Box>
-            <Box className='signupinputf'><TextField className='signuptextf' id="standard-basic" label="University" variant="standard" /></Box>
-            <Box className='signupinputf'><TextField className='signuptextf' id="standard-basic" label="Faculty" variant="standard" /></Box>
+            <Box className='signupinputf'>
+              <TextField className='signuptextf' id="standard-basic" label="First Name" variant="standard" />
+            </Box>
+            <Box className='signupinputf'>
+              <TextField className='signuptextf' id="standard-basic" label="Last Name" variant="standard" />
+            </Box>
+            <Box className='signupinputf'>
+              <TextField className='signuptextf' id="standard-basic" label="Address" variant="standard" />
+            </Box>
+            <Box className='signupinputf'>
+              <TextField className='signuptextf' id="standard-basic" label="Gender" variant="standard" />
+            </Box>
+            <Box className='signupinputf'>
+              <TextField className='signuptextf' id="standard-basic" label="University" variant="standard" />
+            </Box>
+            <Box className='signupinputf'>
+              <TextField className='signuptextf' id="standard-basic" label="Faculty" variant="standard" />
+            </Box>
             <Box className='signupinputf'>
               <FormControl label="Password" variant="standard" className='signuptextf'>
                 <InputLabel htmlFor="standard-adornment-password" >Password</InputLabel>
