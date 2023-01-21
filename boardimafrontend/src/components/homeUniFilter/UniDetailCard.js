@@ -1,129 +1,153 @@
-import * as React from "react";
-import {
-  DataGrid,
-  GridToolbar,
-  GridRowsProp,
-  GridColDef,
-  GridToolbarContainer,
-  GridToolbarExport,
-  GridToolbarFilterButton,
-} from "@mui/x-data-grid";
-import { useDemoData } from "@mui/x-data-grid-generator";
-import ViewPopup from "./ViewPopup";
+import * as React from 'react';
+import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
+import { useDemoData } from '@mui/x-data-grid-generator';
+import ViewPopup from '../homeUniFilter/ViewPopup';
+import Axios from "axios";
+import MapPopup from './MapPopup';
 
-const VISIBLE_FIELDS = ["name", "rating", "country", "dateCreated", "isAdmin"];
 
-function UniDetailCard() {
-  const { data } = useDemoData({
-    dataSet: "Employee",
-    visibleFields: VISIBLE_FIELDS,
-    rowLength: 100,
-  });
-  const rows = [
-    {
-      id: 1,
-      col1: "Owner1",
-      col2: "Address1",
-      col3: "077959617",
-      col4: "Male",
-      col5: "This is a boardim house for boys...",
-      col6: "Available",
-    },
-    {
-      id: 2,
-      col1: "Owner2",
-      col2: "Address2",
-      col3: "0712544757",
-      col4: "Male",
-      col5: "This is a boardim house for boys...",
-      col6: "Available",
-    },
-    {
-      id: 3,
-      col1: "Owner3",
-      col2: "Address3",
-      col3: "076884757",
-      col4: "Female",
-      col5: "This is a boardim house for girl...",
-      col6: "Available",
-    },
-  ];
-  const columns = [
-    {
-      field: "col1",
-      headerName: "Owner Name",
-      headerClassName: "header-class-name",
-      width: 205,
-    },
-    {
-      field: "col2",
-      headerName: "Address",
-      headerClassName: "header-class-name",
-      width: 222,
-    },
-    {
-      field: "col3",
-      headerName: "Contact No",
-      headerClassName: "header-class-name",
-      width: 140,
-    },
-    {
-      field: "col4",
-      headerName: "Gender",
-      headerClassName: "header-class-name",
-      width: 90,
-    },
-    {
-      field: "col5",
-      headerName: "Description",
-      headerClassName: "header-class-name",
-      width: 300,
-    },
-    {
-      field: "col6",
-      headerName: "Status",
-      headerClassName: "header-class-name",
-      width: 90,
-    },
-    {
-      field: "col7",
-      headerName: "View",
-      headerClassName: "header-class-name",
-      headerAlign: "center",
-      width: 100,
-      align: "center",
-      disableColumnMenu: true,
-      sortable: false,
-      renderCell: (params) => {
-        console.log(params.row);
-        const onClick = (e) => {};
-        return <ViewPopup userId={params.row.id} />;
-      },
-    },
-  ];
+function UniDetailCard(props) {
 
-  return (
-    <div style={{ height: 510, width: "100%" }}>
-      <DataGrid
-        {...data}
-        components={{
-          Toolbar: () => {
-            return (
-              <GridToolbarContainer sx={{ justifyContent: "flex-end" }}>
-                {/* <GridToolbarExport sx={{color: "#008080"}}/> */}
-              </GridToolbarContainer>
-            );
-          },
-        }}
-        rows={rows}
-        getRowHeight={() => "130px"}
-        columns={columns}
-        sx={{
-          border: "1px solid #FFFFFF",
-        }}
-      />
-    </div>
-  );
+    const columns = [
+        {
+            field: "ownerName",
+            headerName: "Owner Name",
+            headerClassName: "header-class-name",
+            width: 205,
+        },
+        {
+            field: "address",
+            headerName: "Address",
+            headerClassName: "header-class-name",
+            width: 222,
+        },
+        {
+            field: "gender",
+            headerName: "Gender",
+            headerClassName: "header-class-name",
+            width: 90,
+        },
+        {
+            field: "contactNumber",
+            headerName: "Contact Number",
+            headerClassName: "header-class-name",
+            width: 140,
+        },
+        {
+            field: "description",
+            headerName: "Description",
+            headerClassName: "header-class-name",
+            width: 300,
+        },
+        {
+            field: "busUOC",
+            headerName: "Bus Route to UOC",
+            headerClassName: "header-class-name",
+            width: 300,
+        },
+        {
+            field: "busUOM",
+            headerName: "Bus Route to UOM",
+            headerClassName: "header-class-name",
+            width: 300,
+        },
+        {
+            field: "busUSJ",
+            headerName: "Bus Route to USJ",
+            headerClassName: "header-class-name",
+            width: 300,
+        },
+        {
+            field: "status",
+            headerName: "Status",
+            headerClassName: "header-class-name",
+            width: 90,
+        },
+        {
+            field: "col10",
+            headerName: "View",
+            headerClassName: "header-class-name",
+            headerAlign: "center",
+            width: 100,
+            align: "center",
+            disableColumnMenu: true,
+            sortable: false,
+            renderCell: (params) => {
+                console.log(params.row)
+                const onClick = (e) => { }
+                return (
+                    <ViewPopup images={params.row.image} />
+                );
+            },
+        },
+        {
+            field: "col11",
+            headerName: "Map",
+            headerClassName: "header-class-name",
+            headerAlign: "center",
+            width: 100,
+            align: "center",
+            disableColumnMenu: true,
+            sortable: false,
+            renderCell: (params) => {
+                console.log(params.row)
+                const onClick = (e) => { }
+                return (
+                    <MapPopup images={params.row.id} />
+                );
+            },
+        },
+    ];
+
+    const [boardingData, setboardingData] = React.useState([{}])
+    const [tableData, setTableData] = React.useState([]);
+    let tableRows = [];
+
+    React.useEffect(() => {
+        Axios.get("http://localhost:5000/api/boardim")
+            .then((response) => {
+                response.data.data.map((row) => {
+                    tableRows.push({
+                        id: row.boardimID,
+                        ownerName: row.ownerName,
+                        address: row.address,
+                        gender: row.gender,
+                        contactNumber: row.contactNumber,
+                        description: row.description,
+                        status: row.status,
+                        busUOC: row.busUOC,
+                        busUOM: row.busUOM,
+                        busUSJ: row.busUSJ,
+                        image: row.image
+                    });
+                });
+                setTableData(tableRows);
+            });
+    }, []);
+
+    return (
+
+        <div style={{ height: 510, width: '100%' }}>
+
+            <DataGrid
+                components={{
+                    Toolbar: () => {
+                        return (
+                            <GridToolbarContainer sx={{ justifyContent: 'flex-end' }}>
+                                {/* <GridToolbarExport sx={{color: "#008080"}}/> */}
+                            </GridToolbarContainer>
+                        )
+                    }
+                }}
+                getRowHeight={() => '130px'}
+                columns={columns}
+                rows={tableData}
+                sx={{
+                    border: '1px solid #FFFFFF',
+                }}
+            />
+        </div>
+    );
 }
 
 export default UniDetailCard;

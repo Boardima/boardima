@@ -4,6 +4,7 @@ import Modal from '@mui/material/Modal';
 import { Button } from '@mui/material';
 import styled from '@emotion/styled';
 import { blue} from '@mui/material/colors';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 const style = {
@@ -40,12 +41,12 @@ export default function EditPopup(props) {
 
   return (
     <React.Fragment>
-      <ColorButton1
+      <Button
         style={{ marginRight: 6 }}
         onClick={handleClickOpen}
       >
-        Edit
-      </ColorButton1>
+        <EditIcon sx={{color: "green"}}></EditIcon>
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}

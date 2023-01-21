@@ -5,44 +5,10 @@ import ViewPopup from '../homeUniFilter/ViewPopup';
 import EditPopup from './EditPopup';
 import DeletePopup from './DeletePopup';
 import Axios from "axios";
+import MapPopup from '../homeUniFilter/MapPopup';
 
-const VISIBLE_FIELDS = ['Owner Name'];
 
 function ViewBoarding(props) {
-
-    // const { data } = useDemoData({
-    //     // dataSet: '',
-    //     // visibleFields: VISIBLE_FIELDS,
-    //     rowLength: 100,
-    // });
-
-    // const rows = [
-    //     {
-    //         id: 1,
-    //         col1: 'MUI',
-    //         col2: 28000,
-    //         col3: 28000,
-    //         col4: 28000,
-    //         col5: 28000,
-    //         col6: 28000,
-    //         col7: 28000,
-    //         col8: 28000,
-    //         col9: 28000,
-    //     },
-    //     {
-    //         id: 2,
-    //         id: 1,
-    //         col1: 'MUI',
-    //         col2: 28000,
-    //         col3: 28000,
-    //         col4: 28000,
-    //         col5: 28000,
-    //         col6: 28000,
-    //         col7: 28000,
-    //         col8: 28000,
-    //         col9: 28000,
-    //     },
-    // ];
 
     const columns = [
         {
@@ -65,7 +31,7 @@ function ViewBoarding(props) {
         },
         {
             field: "contactNumber",
-            headerName: "Contac tNumber",
+            headerName: "Contact Number",
             headerClassName: "header-class-name",
             width: 140,
         },
@@ -73,7 +39,7 @@ function ViewBoarding(props) {
             field: "description",
             headerName: "Description",
             headerClassName: "header-class-name",
-            width: 290,
+            width: 300,
         },
         {
             field: "busUOC",
@@ -101,10 +67,10 @@ function ViewBoarding(props) {
         },
         {
             field: "col10",
-            headerName: "View",
+            headerName: "Image",
             headerClassName: "header-class-name",
             headerAlign: "center",
-            width: 97,
+            width: 100,
             align: "center",
             disableColumnMenu: true,
             sortable: false,
@@ -118,10 +84,27 @@ function ViewBoarding(props) {
         },
         {
             field: "col11",
+            headerName: "Map",
+            headerClassName: "header-class-name",
+            headerAlign: "center",
+            width: 100,
+            align: "center",
+            disableColumnMenu: true,
+            sortable: false,
+            renderCell: (params) => {
+                console.log(params.row)
+                const onClick = (e) => { }
+                return (
+                    <MapPopup images={params.row.id} />
+                );
+            },
+        },
+        {
+            field: "col12",
             headerName: "Edit",
             headerClassName: "header-class-name",
             headerAlign: "center",
-            width: 97,
+            width: 100,
             align: "center",
             disableColumnMenu: true,
             sortable: false,
@@ -134,11 +117,11 @@ function ViewBoarding(props) {
             },
         },
         {
-            field: "col12",
+            field: "col14",
             headerName: "Delete",
             headerClassName: "header-class-name",
             headerAlign: "center",
-            width: 97,
+            width: 100,
             align: "center",
             disableColumnMenu: true,
             sortable: false,
@@ -163,6 +146,7 @@ function ViewBoarding(props) {
                     tableRows.push({
                         id: row.boardimID,
                         ownerName: row.ownerName,
+                        address: row.address,
                         gender: row.gender,
                         contactNumber: row.contactNumber,
                         description: row.description,
@@ -193,12 +177,6 @@ function ViewBoarding(props) {
                 }}
                 getRowHeight={() => '130px'}
                 columns={columns}
-                columnVisibilityModel={{
-                    // Hide columns status and traderName, the other columns will remain visible
-                    busUOC: false,
-                    busUOM: false,
-                    busUSJ: false,
-                  }}
                 rows={tableData}
                 sx={{
                     border: '1px solid #FFFFFF',

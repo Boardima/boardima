@@ -8,6 +8,7 @@ import { Grid, Card, CardActionArea, CardActions, CardMedia } from '@mui/materia
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
+import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 
 const style = {
   position: 'absolute',
@@ -50,12 +51,14 @@ export default function ViewPopup(props) {
 
   return (
     <React.Fragment>
-      <ColorButton1
+      <Button
         style={{ marginRight: 6 }}
         onClick={handleClickOpen}
       >
-        Images
-      </ColorButton1>
+        <PhotoLibraryIcon sx={{
+                    color: "orange",
+                }}></PhotoLibraryIcon>
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}

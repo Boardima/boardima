@@ -4,8 +4,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions, Box } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function UniCard(props) {
+
+    const navigate = useNavigate()
+
+    const changeToUniFilter = () => {
+            navigate('/filterhome')
+    }
+
     return (
         <Box sx={{ width: 270, boderColor: "2px solid #FFFFFF"}}>
             <CardActionArea>
@@ -26,7 +34,8 @@ export default function UniCard(props) {
             </CardActionArea>
             <CardActions sx={{m:0, p:0}}>
                 <Button size="small" color="primary"
-                    sx={{ width: "100%", textAlign: "center", color: "#000000", backgroundColor: "#F0D90D" }}>
+                    sx={{ width: "100%", textAlign: "center", color: "#000000", backgroundColor: "#F0D90D" }} 
+                    onClick={changeToUniFilter}>
                     view
                 </Button>
             </CardActions>
