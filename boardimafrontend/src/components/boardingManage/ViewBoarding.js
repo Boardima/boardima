@@ -95,7 +95,7 @@ function ViewBoarding(props) {
                 console.log(params.row)
                 const onClick = (e) => { }
                 return (
-                    <MapPopup images={params.row.id} />
+                    <MapPopup lat={params.row.latitude} lng={params.row.longitude} />
                 );
             },
         },
@@ -112,7 +112,7 @@ function ViewBoarding(props) {
                 console.log(params.row)
                 const onClick = (e) => { }
                 return (
-                    <EditPopup userId={params.row.id} />
+                    <EditPopup tableData={tableData} boardimID={params.row.id} />
                 );
             },
         },
@@ -147,6 +147,8 @@ function ViewBoarding(props) {
                         id: row.boardimID,
                         ownerName: row.ownerName,
                         address: row.address,
+                        latitude: row.latitude,
+                        longitude: row.longitude,
                         gender: row.gender,
                         contactNumber: row.contactNumber,
                         description: row.description,
@@ -160,6 +162,7 @@ function ViewBoarding(props) {
                 setTableData(tableRows);
             });
     }, []);
+
 
     return (
 

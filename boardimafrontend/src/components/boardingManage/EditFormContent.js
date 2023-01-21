@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
-import './formcontent.css';
+import './editformcontent.css';
 import styled from '@emotion/styled';
 import { green, blue, blueGrey } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
@@ -27,16 +27,6 @@ const ColorButton1 = styled(Button)(({ theme }) => ({
     },
 }));
 
-const ColorButton2 = styled(Button)(({ theme }) => ({
-    color: "#ffffff",
-    textTransform: "none",
-    width: '120px',
-    backgroundColor: blue[500],
-    "&:hover": {
-        backgroundColor: blue[700],
-    },
-}));
-
 const ColorButton3 = styled(Button)(({ theme }) => ({
     color: "#ffffff",
     textTransform: "none",
@@ -47,7 +37,7 @@ const ColorButton3 = styled(Button)(({ theme }) => ({
     },
 }));
 
-function FormContent() {
+function EditFormContent(props) {
 
     const [counter, setCounter] = useState(0);
     const dataFetchedRef = useRef(false);
@@ -80,24 +70,11 @@ function FormContent() {
         })
     };
 
-    // useEffect(() => {
-    //     if (dataFetchedRef.current) return;
-    //     dataFetchedRef.current = true;
-    //     listAll(imageListRef).then((response) => {
-    //         response.items.forEach((item) => {
-    //             getDownloadURL(item).then((url) => {
-    //                 setImageList((prev) => [...prev, url])
-    //             })
-    //         })
-    //     })
-    // }, []);
 
     const [data, setData] = useState({
         boardimID: "",
         ownerName: "",
         address: "",
-        longitude: "",
-        latitude: "",
         gender: "",
         contactNumber: "",
         description: "",
@@ -124,8 +101,6 @@ function FormContent() {
             boardimID: data.boardimID,
             ownerName: data.ownerName,
             address: data.address,
-            longitude: data.longitude,
-            latitude: data.latitude,
             gender: data.gender,
             contactNumber: data.contactNumber,
             description: data.description,
@@ -144,15 +119,13 @@ function FormContent() {
 
     console.log(imageList)
 
+    console.log(props.data[0]["id"])
+
     return (
 
-        <div className='page'>
+        <div className='editpage'>
 
             <form>
-
-                <h2 className='form-headline'>Add a New Boarding Place</h2>
-
-                <div className='feedback-form'>
 
                     <div className='form-group'>
                         <label className='form-label'>Owner ID</label>
@@ -160,7 +133,9 @@ function FormContent() {
                             type="text" required
                             className='form-input'
                             name="boardimID"
-                            onChange={handleChange}></input>
+                            value={props.data[0]["id"]}
+                            onChange={handleChange}
+                            readOnly></input>
                     </div>
 
                     <div className='form-group'>
@@ -169,7 +144,7 @@ function FormContent() {
                             type="text" required
                             className='form-input'
                             name="ownerName"
-                            value={data.ownerName}
+                            value={props.data[0]["ownerName"]}
                             onChange={handleChange}></input>
                     </div>
 
@@ -179,13 +154,13 @@ function FormContent() {
                             type="text" required
                             className='form-input'
                             name="address"
-                            value={data.address}
+                            value={props.data[0]["address"]}
                             onChange={handleChange}>
                         </input>
                     </div>
 
                     <div className='form-group'>
-                        <Accordion >
+                        <Accordion className='form-group-tab'>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
@@ -197,17 +172,11 @@ function FormContent() {
                                 <div className='form-group-coordinate'>
                                     <div >
                                         <label className='form-label'>Latitude</label><br></br>
-                                        <input type="text" required className='form-input-coordinate'
-                                            name="latitude"
-                                            value={data.latitude}
-                                            onChange={handleChange}></input>
+                                        <input type="text" required className='form-input-coordinate'></input>
                                     </div>
                                     <div >
                                         <label className='form-label'>Longitude</label><br></br>
-                                        <input type="text" required className='form-input-coordinate'
-                                            name="longitude"
-                                            value={data.longitude}
-                                            onChange={handleChange}></input>
+                                        <input type="text" required className='form-input-coordinate'></input>
                                     </div>
                                 </div>
                             </AccordionDetails>
@@ -224,6 +193,7 @@ function FormContent() {
                                 id="male"
                                 name="gender"
                                 value="Male"
+                                checked={props.data[0]["gender"] == "Male"}
                                 onChange={handleChange} />
 
                             <label for="female">Female</label>
@@ -232,6 +202,7 @@ function FormContent() {
                                 id="female"
                                 name="gender"
                                 value="Female"
+                                checked={props.data[0]["gender"] == "Female"}
                                 onChange={handleChange} />
                         </div>
 
@@ -243,7 +214,7 @@ function FormContent() {
                             type="text" required
                             className='form-input'
                             name="contactNumber"
-                            value={data.contactNumber}
+                            value={props.data[0]["contactNumber"]}
                             onChange={handleChange}></input>
                     </div>
 
@@ -253,7 +224,7 @@ function FormContent() {
                             type="textarea" required
                             className='form-input'
                             name="description"
-                            value={data.description}
+                            value={props.data[0]["description"]}
                             onChange={handleChange}></input>
                     </div>
 
@@ -263,7 +234,7 @@ function FormContent() {
                             type="text" required
                             className='form-input'
                             name="busUOC"
-                            value={data.busUOC}
+                            value={props.data[0]["busUOC"]}
                             onChange={handleChange}></input>
                     </div>
 
@@ -273,7 +244,7 @@ function FormContent() {
                             type="text" required
                             className='form-input'
                             name="busUOM"
-                            value={data.busUOM}
+                            value={props.data[0]["busUOM"]}
                             onChange={handleChange}></input>
                     </div>
 
@@ -283,7 +254,7 @@ function FormContent() {
                             type="text" required
                             className='form-input'
                             name="busUSJ"
-                            value={data.busUSJ}
+                            value={props.data[0]["busUSJ"]}
                             onChange={handleChange}></input>
                     </div>
 
@@ -371,12 +342,11 @@ function FormContent() {
                     </Box>
                     {/* </div> */}
 
-                    <div className='form-group-button'>
-                        <ColorButton2 onClick={navigateToBoardingManage}>CLOSE</ColorButton2>
+                    <div className='form-group-btn'>
                         <ColorButton1 onClick={handleSubmit}>SAVE</ColorButton1>
                     </div>
 
-                </div>
+               
 
             </form>
 
@@ -384,4 +354,4 @@ function FormContent() {
     );
 }
 
-export default FormContent;
+export default EditFormContent;
