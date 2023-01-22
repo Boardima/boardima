@@ -373,7 +373,7 @@ function FeedbackForm() {
             ></input>
             <span style={{ color: "red" }}>
               {feedback === "" || feedback.length < 300
-                ? "Feedback should have atleast 50 word count"
+                ? "Feedback should have atleast 300 word count"
                 : ""}
             </span>
           </div>
