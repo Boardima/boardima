@@ -5,6 +5,7 @@ import { Button } from '@mui/material';
 import styled from '@emotion/styled';
 import { blue} from '@mui/material/colors';
 import MapContent from './MapContent';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const style = {
   position: 'absolute',
@@ -35,21 +36,18 @@ export default function MapPopup(props) {
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const lat=6.341530260094496
-  const lng=80.23768223058245
-
   React.useEffect(() => {
     setOpen(props.flag);
   }, []);
 
   return (
     <React.Fragment>
-      <ColorButton1
+      <Button
         style={{ marginRight: 6 }}
         onClick={handleClickOpen}
       >
-        Map
-      </ColorButton1>
+        <LocationOnIcon></LocationOnIcon>
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -58,7 +56,7 @@ export default function MapPopup(props) {
       >
         <Box sx={style}>
           <Box>
-            <MapContent></MapContent>
+            <MapContent lat={props.lat} lng={props.lng}></MapContent>
             </Box>
         </Box>
       </Modal>

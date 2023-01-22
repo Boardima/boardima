@@ -12,10 +12,12 @@ export default function MapContent(props) {
 
     React.useEffect(() => {
         const iframeData = document.getElementById("iframeid")
-        const lat = 6.341530260094496
-        const lng = 80.23768223058245
+        const lat = props.lat
+        const lng = props.lng
         iframeData.src = `https://maps.google.com/maps?q=${lat},${lng}&hl=es;&output=embed`
     }, []);
+
+    console.log(props.lat,props.lng)
 
     return (
         <Box>
