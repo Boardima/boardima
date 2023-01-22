@@ -50,15 +50,14 @@ function FilterMain() {
                 sx={{
                     display: 'flex',
                     justifyContent: 'center',
-                    p: 1,
                     m: 15,
                     bgcolor: 'background.paper',
                     borderRadius: 1,
                     border:'1px solid #FFFFFF',
-                    height:'60vh',
+                    height:'620',
                 }}
             >
-                <Item><UniDetailCard /></Item>
+                <UniDetailCard />
             </Box>
 
         </div>

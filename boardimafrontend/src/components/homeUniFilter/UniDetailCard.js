@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
-import { useDemoData } from '@mui/x-data-grid-generator';
 import ViewPopup from '../homeUniFilter/ViewPopup';
 import Axios from "axios";
-import MapPopup from './MapPopup';
-
+import MapPopup from '../homeUniFilter/MapPopup';
+import CheckIcon from '@mui/icons-material/Check';
+import ClearIcon from '@mui/icons-material/Clear';
+import DescriptionData from '../boardingManage/DescriptionData';
+import BusRouteData from '../boardingManage/BusRouteData';
 
 function UniDetailCard(props) {
 
@@ -13,59 +15,109 @@ function UniDetailCard(props) {
             field: "ownerName",
             headerName: "Owner Name",
             headerClassName: "header-class-name",
-            width: 205,
+            width: 320,
         },
-        {
-            field: "address",
-            headerName: "Address",
-            headerClassName: "header-class-name",
-            width: 222,
-        },
+        // {
+        //     field: "address",
+        //     headerName: "Address",
+        //     headerClassName: "header-class-name",
+        //     width: 222,
+        // },
         {
             field: "gender",
             headerName: "Gender",
             headerClassName: "header-class-name",
-            width: 90,
+            width: 160,
         },
         {
             field: "contactNumber",
-            headerName: "Contact Number",
+            headerName: "Contact No",
             headerClassName: "header-class-name",
-            width: 140,
+            width: 190,
         },
         {
             field: "description",
             headerName: "Description",
             headerClassName: "header-class-name",
-            width: 300,
+            headerAlign: "center",
+            align: "center",
+            disableColumnMenu: true,
+            sortable: false,
+            width: 140,
+            style:{wordBreak:"break-all", wordWrap: "break-word", width:300},
+            renderCell: (params) => {
+                return (
+                    <DescriptionData des={params.row.description}></DescriptionData>
+                );
+            },
         },
         {
             field: "busUOC",
-            headerName: "Bus Route to UOC",
+            headerName: "UOC",
             headerClassName: "header-class-name",
-            width: 300,
+            headerAlign: "center",
+            align: "center",
+            disableColumnMenu: true,
+            sortable: false,
+            width: 100,
+            renderCell: (params) => {
+                return (
+                    <BusRouteData route={"Bus Route to UOC"} value={params.row.busUOC}></BusRouteData>
+                );
+            },
         },
         {
             field: "busUOM",
-            headerName: "Bus Route to UOM",
+            headerName: "UOM",
             headerClassName: "header-class-name",
-            width: 300,
+            headerAlign: "center",
+            align: "center",
+            disableColumnMenu: true,
+            sortable: false,
+            width: 100,
+            renderCell: (params) => {
+                return (
+                    <BusRouteData route={"Bus Route to UOM"} value={params.row.busUOM}></BusRouteData>
+                );
+            },
         },
         {
             field: "busUSJ",
-            headerName: "Bus Route to USJ",
+            headerName: "USJ",
             headerClassName: "header-class-name",
-            width: 300,
+            headerAlign: "center",
+            align: "center",
+            disableColumnMenu: true,
+            sortable: false,
+            width: 100,
+            renderCell: (params) => {
+                return (
+                    <BusRouteData route={"Bus Route to USJ"} value={params.row.busUSJ}></BusRouteData>
+                );
+            },
         },
         {
             field: "status",
             headerName: "Status",
             headerClassName: "header-class-name",
-            width: 90,
+            headerAlign: "center",
+            align: "center",
+            width: 120,
+            renderCell: (params) => {
+                if(params.row.status == "Available"){
+                    return (
+                        <CheckIcon sx={{color: "#2ECC71"}}></CheckIcon>
+                    );
+                }else{
+                    return (
+                        <ClearIcon sx={{color: "#CB4335"}}></ClearIcon>
+                    );
+                }
+            },
         },
         {
             field: "col10",
-            headerName: "View",
+            headerName: "Image",
             headerClassName: "header-class-name",
             headerAlign: "center",
             width: 100,
@@ -93,7 +145,7 @@ function UniDetailCard(props) {
                 console.log(params.row)
                 const onClick = (e) => { }
                 return (
-                    <MapPopup images={params.row.id} />
+                    <MapPopup lat={params.row.latitude} lng={params.row.longitude} />
                 );
             },
         },
@@ -111,6 +163,8 @@ function UniDetailCard(props) {
                         id: row.boardimID,
                         ownerName: row.ownerName,
                         address: row.address,
+                        latitude: row.latitude,
+                        longitude: row.longitude,
                         gender: row.gender,
                         contactNumber: row.contactNumber,
                         description: row.description,
@@ -125,9 +179,10 @@ function UniDetailCard(props) {
             });
     }, []);
 
+
     return (
 
-        <div style={{ height: 510, width: '100%' }}>
+        <div style={{ height: 620, width: '100%' }}>
 
             <DataGrid
                 components={{
