@@ -1,12 +1,11 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { autocompleteClasses, Button, Typography } from '@mui/material';
+import { Button } from '@mui/material';
 import styled from '@emotion/styled';
 import { blue} from '@mui/material/colors';
-import EditIcon from '@mui/icons-material/Edit';
-import EditFormContent from './EditFormContent';
-
+import MapContent from './MapContent';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const style = {
   position: 'absolute',
@@ -14,25 +13,13 @@ const style = {
   left: '50%',                                                                         
   transform: 'translate(-50%, -50%)',
   width: 600,
-  height: 450,
+  height: 500, 
   bgcolor: 'background.paper',
   border: '1px solid #FFFFFF',
   boxShadow: 24,
-  p:2,
+  p:1,
   borderRadius: '10px',
 };
-
-const stylehead = {
-  color: "green",
-  fontSize: 16,
-}
-
-const styletwo = {
-  marginTop: 2,
-  height: 400,
-  overflow: "hidden",
-  overflowY: "scroll",
-}
 
 //Colour buttons
 const ColorButton1 = styled(Button)(({ theme }) => ({
@@ -44,7 +31,7 @@ const ColorButton1 = styled(Button)(({ theme }) => ({
   },
 }));
 
-export default function EditPopup(props) {
+export default function MapPopup(props) {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -53,19 +40,13 @@ export default function EditPopup(props) {
     setOpen(props.flag);
   }, []);
 
-
-  const filteredData = props.tableData.filter(
-    (item) => item.id === props.boardimID
-  );
-
-
   return (
     <React.Fragment>
       <Button
         style={{ marginRight: 6 }}
         onClick={handleClickOpen}
       >
-        <EditIcon sx={{color: "green"}}></EditIcon>
+        <LocationOnIcon></LocationOnIcon>
       </Button>
       <Modal
         open={open}
@@ -74,10 +55,9 @@ export default function EditPopup(props) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography sx={stylehead}>Edit Boarding Place Details</Typography>
-          <Box sx={styletwo}>
-            <EditFormContent data={filteredData} boardimID={props.boardimID}/>
-          </Box>
+          <Box>
+            <MapContent lat={props.lat} lng={props.lng}></MapContent>
+            </Box>
         </Box>
       </Modal>
     </React.Fragment>

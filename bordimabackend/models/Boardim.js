@@ -16,6 +16,8 @@ const BoardimSchema = new Schema({
     type: String,
     required: [true, "Please add address"],
   },
+  longitude: String,
+  latitude: String,
   gender: {
     type: String,
     enum: ['Male', 'Female'],
@@ -80,7 +82,7 @@ BoardimSchema.pre("save", async function (next) {
     coordinates: [loc[0].longitude, loc[0].latitude],
     formattedAddress: loc[0].formattedAddress,
   };
-  this.address = undefined;
+  // this.address = undefined;
 
   next();
 });

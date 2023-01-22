@@ -1,0 +1,84 @@
+.editpage{
+    margin: auto;
+    background: #ffffff;
+    padding: 1px 20px 20px 20px;
+    border-radius: 10px;
+}
+
+.form-group{
+    padding-top: 30px;
+    display: grid;
+}
+
+.form-group-tab{
+    width: 520px;
+}
+
+.form-group-coordinate{
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group-radio{
+    padding-top: 35px;
+}
+
+.image-group{
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-label{
+    padding-bottom: 5px;
+}
+
+.form-input{
+    padding: 10px;
+    width: 500px;
+    border-radius: 5px;
+    border: 1px solid #a09e9e;
+}
+
+.form-input-image{
+    padding-top: 10px;
+}
+
+.form-input-coordinate{
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #a09e9e;
+}
+
+.form-input option{
+    padding: 10px;
+    width: 500px;
+    border-radius: 5px;
+}
+
+.form-input:focus{
+    outline: none !important;
+    border: 2px solid  rgb(232, 213, 70);
+}
+
+.form-input-coordinate:focus{
+    outline: none !important;
+    border: 2px solid  rgb(232, 213, 70);
+}
+
+.form-group-btn{
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+}
+
+.form-group-radio-content{
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+}
+
+.radio-button{
+    accent-color: rgb(23, 23, 22);
+}

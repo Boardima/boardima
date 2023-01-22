@@ -5,106 +5,126 @@ import ViewPopup from '../homeUniFilter/ViewPopup';
 import EditPopup from './EditPopup';
 import DeletePopup from './DeletePopup';
 import Axios from "axios";
-
-const VISIBLE_FIELDS = ['Owner Name'];
+import MapPopup from '../homeUniFilter/MapPopup';
+import { Typography } from '@mui/material';
+import DescriptionData from './DescriptionData';
+import CheckIcon from '@mui/icons-material/Check';
+import ClearIcon from '@mui/icons-material/Clear';
+import BusRouteData from './BusRouteData';
 
 function ViewBoarding(props) {
-
-    // const { data } = useDemoData({
-    //     // dataSet: '',
-    //     // visibleFields: VISIBLE_FIELDS,
-    //     rowLength: 100,
-    // });
-
-    // const rows = [
-    //     {
-    //         id: 1,
-    //         col1: 'MUI',
-    //         col2: 28000,
-    //         col3: 28000,
-    //         col4: 28000,
-    //         col5: 28000,
-    //         col6: 28000,
-    //         col7: 28000,
-    //         col8: 28000,
-    //         col9: 28000,
-    //     },
-    //     {
-    //         id: 2,
-    //         id: 1,
-    //         col1: 'MUI',
-    //         col2: 28000,
-    //         col3: 28000,
-    //         col4: 28000,
-    //         col5: 28000,
-    //         col6: 28000,
-    //         col7: 28000,
-    //         col8: 28000,
-    //         col9: 28000,
-    //     },
-    // ];
 
     const columns = [
         {
             field: "ownerName",
             headerName: "Owner Name",
             headerClassName: "header-class-name",
-            width: 205,
+            width: 300,
         },
-        {
-            field: "address",
-            headerName: "Address",
-            headerClassName: "header-class-name",
-            width: 222,
-        },
+        // {
+        //     field: "address",
+        //     headerName: "Address",
+        //     headerClassName: "header-class-name",
+        //     width: 222,
+        // },
         {
             field: "gender",
             headerName: "Gender",
             headerClassName: "header-class-name",
-            width: 90,
+            width: 150,
         },
         {
             field: "contactNumber",
-            headerName: "Contac tNumber",
+            headerName: "Contact No",
             headerClassName: "header-class-name",
-            width: 140,
+            width: 180,
         },
         {
             field: "description",
             headerName: "Description",
             headerClassName: "header-class-name",
-            width: 290,
+            headerAlign: "center",
+            align: "center",
+            disableColumnMenu: true,
+            sortable: false,
+            width: 140,
+            style:{wordBreak:"break-all", wordWrap: "break-word", width:300},
+            renderCell: (params) => {
+                return (
+                    <DescriptionData des={params.row.description}></DescriptionData>
+                );
+            },
         },
         {
             field: "busUOC",
-            headerName: "Bus Route to UOC",
+            headerName: "UOC",
             headerClassName: "header-class-name",
-            width: 300,
+            headerAlign: "center",
+            align: "center",
+            disableColumnMenu: true,
+            sortable: false,
+            width: 80,
+            renderCell: (params) => {
+                return (
+                    <BusRouteData route={"Bus Route to UOC"} value={params.row.busUOC}></BusRouteData>
+                );
+            },
         },
         {
             field: "busUOM",
-            headerName: "Bus Route to UOM",
+            headerName: "UOM",
             headerClassName: "header-class-name",
-            width: 300,
+            headerAlign: "center",
+            align: "center",
+            disableColumnMenu: true,
+            sortable: false,
+            width: 80,
+            renderCell: (params) => {
+                return (
+                    <BusRouteData route={"Bus Route to UOM"} value={params.row.busUOM}></BusRouteData>
+                );
+            },
         },
         {
             field: "busUSJ",
-            headerName: "Bus Route to USJ",
+            headerName: "USJ",
             headerClassName: "header-class-name",
-            width: 300,
+            headerAlign: "center",
+            align: "center",
+            disableColumnMenu: true,
+            sortable: false,
+            width: 80,
+            renderCell: (params) => {
+                return (
+                    <BusRouteData route={"Bus Route to USJ"} value={params.row.busUSJ}></BusRouteData>
+                );
+            },
         },
         {
             field: "status",
             headerName: "Status",
             headerClassName: "header-class-name",
+            headerAlign: "center",
+            align: "center",
             width: 90,
+            renderCell: (params) => {
+                if(params.row.status == "Available"){
+                    return (
+                        <CheckIcon sx={{color: "#2ECC71"}}></CheckIcon>
+                    );
+                }else{
+                    return (
+                        <ClearIcon sx={{color: "#CB4335"}}></ClearIcon>
+                    );
+                }
+            },
         },
         {
             field: "col10",
-            headerName: "View",
+            headerName: "Image",
             headerClassName: "header-class-name",
             headerAlign: "center",
-            width: 97,
+            width: 100,
             align: "center",
             disableColumnMenu: true,
             sortable: false,
@@ -118,10 +138,10 @@ function ViewBoarding(props) {
         },
         {
             field: "col11",
-            headerName: "Edit",
+            headerName: "Map",
             headerClassName: "header-class-name",
             headerAlign: "center",
-            width: 97,
+            width: 100,
             align: "center",
             disableColumnMenu: true,
             sortable: false,
@@ -129,16 +149,33 @@ function ViewBoarding(props) {
                 console.log(params.row)
                 const onClick = (e) => { }
                 return (
-                    <EditPopup userId={params.row.id} />
+                    <MapPopup lat={params.row.latitude} lng={params.row.longitude} />
                 );
             },
         },
         {
             field: "col12",
+            headerName: "Edit",
+            headerClassName: "header-class-name",
+            headerAlign: "center",
+            width: 100,
+            align: "center",
+            disableColumnMenu: true,
+            sortable: false,
+            renderCell: (params) => {
+                console.log(params.row)
+                const onClick = (e) => { }
+                return (
+                    <EditPopup tableData={tableData} boardimID={params.row.id} />
+                );
+            },
+        },
+        {
+            field: "col14",
             headerName: "Delete",
             headerClassName: "header-class-name",
             headerAlign: "center",
-            width: 97,
+            width: 100,
             align: "center",
             disableColumnMenu: true,
             sortable: false,
@@ -163,6 +200,9 @@ function ViewBoarding(props) {
                     tableRows.push({
                         id: row.boardimID,
                         ownerName: row.ownerName,
+                        address: row.address,
+                        latitude: row.latitude,
+                        longitude: row.longitude,
                         gender: row.gender,
                         contactNumber: row.contactNumber,
                         description: row.description,
@@ -176,6 +216,7 @@ function ViewBoarding(props) {
                 setTableData(tableRows);
             });
     }, []);
+
 
     return (
 
@@ -193,12 +234,6 @@ function ViewBoarding(props) {
                 }}
                 getRowHeight={() => '130px'}
                 columns={columns}
-                columnVisibilityModel={{
-                    // Hide columns status and traderName, the other columns will remain visible
-                    busUOC: false,
-                    busUOM: false,
-                    busUSJ: false,
-                  }}
                 rows={tableData}
                 sx={{
                     border: '1px solid #FFFFFF',
