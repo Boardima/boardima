@@ -194,27 +194,28 @@ function ViewBoarding(props) {
     let tableRows = [];
 
     React.useEffect(() => {
-        Axios.get("http://localhost:5000/api/boardim")
-            .then((response) => {
-                response.data.data.map((row) => {
-                    tableRows.push({
-                        id: row.boardimID,
-                        ownerName: row.ownerName,
-                        address: row.address,
-                        latitude: row.latitude,
-                        longitude: row.longitude,
-                        gender: row.gender,
-                        contactNumber: row.contactNumber,
-                        description: row.description,
-                        status: row.status,
-                        busUOC: row.busUOC,
-                        busUOM: row.busUOM,
-                        busUSJ: row.busUSJ,
-                        image: row.image
-                    });
-                });
-                setTableData(tableRows);
+        Axios.get("https://boardima-backend.onrender.com/api/boardim").then(
+          (response) => {
+            response.data.data.map((row) => {
+              tableRows.push({
+                id: row.boardimID,
+                ownerName: row.ownerName,
+                address: row.address,
+                latitude: row.latitude,
+                longitude: row.longitude,
+                gender: row.gender,
+                contactNumber: row.contactNumber,
+                description: row.description,
+                status: row.status,
+                busUOC: row.busUOC,
+                busUOM: row.busUOM,
+                busUSJ: row.busUSJ,
+                image: row.image,
+              });
             });
+            setTableData(tableRows);
+          }
+        );
     }, []);
 
 

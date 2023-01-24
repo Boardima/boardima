@@ -38,7 +38,7 @@ function FeedbackForm() {
   const [feedback, setFeedback] = useState("");
   async function submitForm() {
     const result = await axios.post(
-      "http://localhost:5000/api/boardim/feedback",
+      "https://boardima-backend.onrender.com/api/boardim/feedback",
       {
         fullName: fullName,
         address: address,

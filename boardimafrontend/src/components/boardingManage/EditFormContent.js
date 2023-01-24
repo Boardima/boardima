@@ -110,11 +110,13 @@ function EditFormContent(props) {
             nearUni: uni,
             image: imageList,
         };
-        axios.post("http://localhost:5000/api/boardim/", userData).then((response) => {
+        axios
+          .post("https://boardima-backend.onrender.com/api/boardim/", userData)
+          .then((response) => {
             console.log(response.status);
             console.log(response.data.token);
-            alert("ok")
-        });
+            alert("ok");
+          });
     };
 
     console.log(imageList)
