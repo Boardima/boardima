@@ -35,14 +35,14 @@ function App() {
 
             <Routes>
               <Route path="/" element={<LandingMain />}></Route>
-              <Route path="/signin" element={<SignIn />}></Route>
-              <Route path="/signup" element={<SignUp />}></Route>
+              {/* <Route path="/signin" element={<SignIn />}></Route> */}
+              {/* <Route path="/signup" element={<SignUp />}></Route> */}
               <Route path='/userhome' element={<UserHome />}></Route>
               <Route path='/submitfeedback' element={<UserFeedback />}></Route>
               <Route path='/filterhome' element={<FilterMain />}></Route>
-              <Route path='/adminhome' element={<Home />}></Route>
-              <Route path='/boardingManage' element={<BoardingManage />}></Route>
-              <Route path='/boardingform' element={<BoardingForm />}></Route>
+              {/* <Route path='/adminhome' element={<Home />}></Route> */}
+              {/* <Route path='/boardingManage' element={<BoardingManage />}></Route> */}
+              {/* <Route path='/boardingform' element={<BoardingForm />}></Route> */}
             </Routes>
 
           </BrowserRouter>
