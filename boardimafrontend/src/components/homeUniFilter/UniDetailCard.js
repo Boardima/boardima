@@ -157,8 +157,8 @@ function UniDetailCard(props) {
   React.useEffect(() => {
     Axios.get("https://boardima-backend.onrender.com/api/boardim").then(
       (response) => {
-        response.data.data[0].nearUni[0].includes(props.uniName) &&
-          response.data.data.map((row) => {
+        response.data.data.map((row) => {
+          if (row.nearUni[0].includes(props.uniName)) {
             tableRows.push({
               id: row.boardimID,
               ownerName: row.ownerName,
@@ -174,7 +174,8 @@ function UniDetailCard(props) {
               busUSJ: row.busUSJ,
               image: row.image,
             });
-          });
+          }
+        });
         setTableData(tableRows);
       }
     );
