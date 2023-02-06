@@ -20,15 +20,15 @@ const BoardimSchema = new Schema({
   latitude: String,
   gender: {
     type: String,
-    enum: ['Male', 'Female'],
-    default: 'None',
+    enum: ["Male", "Female"],
+    default: "None",
   },
   contactNumber: String,
   description: String,
   status: {
     type: String,
-    enum: ['Available', 'Unavailable'],
-    default: 'Available',
+    enum: ["Available", "Unavailable"],
+    default: "Available",
   },
   busUOC: {
     type: String,
@@ -40,11 +40,11 @@ const BoardimSchema = new Schema({
     type: String,
   },
   nearUni: {
-    type: Array,
+    type: [String],
   },
   image: {
     type: [String],
-    validate:(v)=>Array.isArray(v) && v.length>0,
+    validate: (v) => Array.isArray(v) && v.length > 0,
   },
   location: {
     type: {
