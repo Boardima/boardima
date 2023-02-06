@@ -158,6 +158,7 @@ function UniDetailCard(props) {
     Axios.get("https://boardima-backend.onrender.com/api/boardim").then(
       (response) => {
         response.data.data.map((row) => {
+          console.log(response.data.data);
           if (row.nearUni[0].includes(props.uniName)) {
             tableRows.push({
               id: row.boardimID,
