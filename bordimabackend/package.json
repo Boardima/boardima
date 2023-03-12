@@ -8,6 +8,7 @@
         "cors": "^2.8.5",
         "dotenv": "^16.0.3",
         "express": "^4.18.2",
+        "jsonwebtoken": "^9.0.0",
         "mongoose": "^6.8.2",
         "mongoose-auto-increment": "^5.0.1",
         "node-geocoder": "^4.2.0",

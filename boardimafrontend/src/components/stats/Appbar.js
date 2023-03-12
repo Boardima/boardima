@@ -16,8 +16,11 @@ import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
-// const navItems = [{ name: 'Sign Up', id: 0, active: 1 }, { name: 'Sign In', id: 1, active: 2 }];
-const navItems = [{ name: "Get Started", id: 0, active: 1 }];
+const navItems = [
+  { name: "Sign Up", id: 0, active: 1 },
+  // { name: "Sign In", id: 1, active: 2 },
+  { name: "Get Started", id: 1, active: 1 },
+];
 
 function Appbar(props) {
   const { window } = props;
@@ -31,9 +34,9 @@ function Appbar(props) {
 
   const changeButton = (id) => {
     if (id == 0) {
-      navigate("/userhome");
+      navigate("/signup");
     } else {
-      navigate("/signin");
+      navigate("/login");
     }
   };
 
