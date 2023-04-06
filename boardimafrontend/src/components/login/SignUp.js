@@ -76,9 +76,8 @@ function SignUp() {
     }
   };
 
-  
+
   const handleSubmit = async () => {
-    console.log(email, university, password, address, gender);
 
     const data = await axios
       .post("https://boardima-backend.onrender.com/api/boardim/register", {
