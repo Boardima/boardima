@@ -33,24 +33,31 @@ function SignIn() {
           Swal.fire("Hey user!", "Welcome", response.data.message);
           localStorage.setItem("token", response.data.token);
           navigate("/userhome");
+        })
+        .catch((error) => {
+          console.log(error);
+          switch (error.response.status) {
+            case 404:
+              Swal.fire(
+                "Hey user!",
+                error.response.data.message,
+                "No user found"
+              );
+              return;
+            case 500:
+              Swal.fire(
+                "Hey user!",
+                error.response.data.message,
+                "Please Try Again"
+              );
+              return;
+            default:
+              Swal.fire("Hey user!", "Error", "");
+              return;
+          }
         });
     } catch (error) {
-      console.log(error);
-      switch (error.response.status) {
-        case 404:
-          Swal.fire("Hey user!", error.response.data.message, "No user found");
-          return;
-        case 500:
-          Swal.fire(
-            "Hey user!",
-            error.response.data.message,
-            "Please Try Again"
-          );
-          return;
-        default:
-          Swal.fire("Hey user!", "Error", "");
-          return;
-      }
+      console.log(error.response);
     }
   };
 
