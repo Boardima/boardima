@@ -76,11 +76,12 @@ function SignUp() {
     }
   };
 
+  
   const handleSubmit = async () => {
     console.log(email, university, password, address, gender);
 
     const data = await axios
-      .post("http://localhost:5000/api/boardim/register", {
+      .post("https://boardima-backend.onrender.com/api/boardim/register", {
         email: email,
         university: university,
         password: password,

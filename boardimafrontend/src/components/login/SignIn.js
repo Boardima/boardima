@@ -25,7 +25,7 @@ function SignIn() {
   const signInUser = async () => {
     try {
       const data = await axios
-        .post("http://localhost:5000/api/boardim/login", {
+        .post("https://boardima-backend.onrender.com/api/boardim/login", {
           email: email,
           password: password,
         })
