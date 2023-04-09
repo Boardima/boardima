@@ -98,11 +98,6 @@ export default function ViewPopup(props) {
                                                         sx={{ width: "250px", height: "150px", objectFit: "contain", pt: 2 }}
                                                     />
                                                 </CardActionArea>
-                                                <CardActions sx={{ m: 0, p: 0 }}>
-                                                    <IconButton>
-                                                        <DeleteIcon />
-                                                    </IconButton>
-                                                </CardActions>
                                             </Card>
                                         </Box>
                                     </Grid>
