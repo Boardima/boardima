@@ -359,6 +359,22 @@ function FeedbackForm() {
                 : "Please Provide valid telephone number"}
             </span>
           </div>
+          <div>
+            <b>
+              Dear valued visitors, We hope that you have found our website{" "}
+              <br></br>
+              helpful in your search for accommodation facilities. As part of
+              our<br></br> ongoing effort to improve our services, we would
+              greatly appreciate <br></br> it if you could take a few moments to
+              fill out our feedback <br></br>form. Your feedback is important to
+              us and will help us to <br></br> continue to provide the best
+              possible experience for our users. <br></br> Thank you for
+              your time and support. Important: For those who fill out <br></br>
+              our feedback form, we will be offering a free month's fee for{" "}
+              <br></br>
+              boarding places, subject to terms and conditions.
+            </b>
+          </div>
           <div className="form-group">
             <label className="form-label">
               Give your feedback regarding the service
@@ -371,10 +387,9 @@ function FeedbackForm() {
                 setFeedback(e.target.value);
               }}
             ></input>
+
             <span style={{ color: "red" }}>
-              {feedback === "" || feedback.length < 300
-                ? "Feedback should have atleast 300 word count"
-                : ""}
+              {feedback === "" ? "Please add your feedback here" : ""}
             </span>
           </div>
           <div className="form-group">
