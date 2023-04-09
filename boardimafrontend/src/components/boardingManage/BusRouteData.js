@@ -46,26 +46,23 @@ export default function BusRouteData(props) {
     }, []);
 
     return (
-        <React.Fragment>
-            <Button
-                style={{ marginRight: 6 }}
-                onClick={handleClickOpen}
-            >
-                <DirectionsBusIcon sx={{ color: "#008080" }}></DirectionsBusIcon>
-            </Button>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
-                    <Box>
-                        <Typography sx={stylehead}>{props.route}</Typography>
-                        <Typography>{props.value}</Typography>
-                    </Box>
-                </Box>
-            </Modal>
-        </React.Fragment>
+      <React.Fragment>
+        <Button style={{ marginRight: 6 }} onClick={handleClickOpen}>
+          <DirectionsBusIcon sx={{ color: "#008080" }}></DirectionsBusIcon>
+        </Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Box style={{ maxHeight: "100%", overflow: "auto" }}>
+              <Typography sx={stylehead}>{props.route}</Typography>
+              <Typography>{props.value}</Typography>
+            </Box>
+          </Box>
+        </Modal>
+      </React.Fragment>
     );
 }
