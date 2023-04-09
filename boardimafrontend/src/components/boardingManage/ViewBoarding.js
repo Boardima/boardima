@@ -29,7 +29,7 @@ function ViewBoarding(props) {
         // },
         {
             field: "gender",
-            headerName: "Gender",
+            headerName: "Boardim Type",
             headerClassName: "header-class-name",
             width: 150,
         },
