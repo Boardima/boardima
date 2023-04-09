@@ -48,22 +48,26 @@ exports.login = async (req, res, next) => {
         message: "Wrong Credentials",
       });
       return;
-    } else if (logonUser.length === 1) {
-      if (logonUser[0].password === req.body.password) {
-        res.status(200).json({
-          token: token,
-          success: true,
-          message: "Successfully Login",
-        });
-        return;
-      } else {
-        res.status(404).json({
-          success: true,
-          message: "password do not match",
-        });
-        return;
-      }
-    }
+    } else if (logonUser.length > 0) {
+      
+      logonUser.map((obj) => {
+        console.log(obj,"================");
+        if (obj.password === req.body.password) {
+          res.status(200).json({
+            token: token,
+            success: true,
+            message: "Successfully Login",
+          });
+         return;
+        }
+      });
+    }  
+      res.status(404).json({
+        success: true,
+        message: "password do not match",
+      });
+      return;
+    
   } catch (error) {
     console.log(error);
     res.status(500).json({

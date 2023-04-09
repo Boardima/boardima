@@ -39,27 +39,25 @@ Item.propTypes = {
 
 function Footer() {
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                justifyContent: 'space-around',
-                bgcolor: 'background.paper',
-                height: "8vh",
-                background: "#000",
-            }}
-        >
-            <Item>Ⓒ 2022 Boardima. All right reserved.</Item>
-            <Item>
-
-                <Box sx={{ display: "flex", justifyContent: "space-evenly"}}>
-                    <FacebookIcon sx={{mr:4}}/>
-                    <TwitterIcon sx={{mr:4}}/>
-                    <LinkedInIcon sx={{mr:4}}/>
-                    <InstagramIcon sx={{mr:4}}/>
-                </Box>
-
-            </Item>
-        </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-around",
+          bgcolor: "background.paper",
+          height: "8vh",
+          background: "#000",
+        }}
+      >
+        <Item>Ⓒ 2023 PERFECT PLACE. All right reserved.</Item>
+        <Item>
+          <Box sx={{ display: "flex", justifyContent: "space-evenly" }}>
+            <FacebookIcon sx={{ mr: 4 }} />
+            <TwitterIcon sx={{ mr: 4 }} />
+            <LinkedInIcon sx={{ mr: 4 }} />
+            <InstagramIcon sx={{ mr: 4 }} />
+          </Box>
+        </Item>
+      </Box>
     );
 
 }

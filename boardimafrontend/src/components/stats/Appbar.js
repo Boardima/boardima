@@ -47,7 +47,7 @@ function Appbar(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        Boardima
+        PERFECT PLACE
       </Typography>
       <Divider />
       <List>
@@ -100,7 +100,7 @@ function Appbar(props) {
                 letterSpacing: ".3rem",
               }}
             >
-              Boardima
+               PERFECT PLACE
             </Button>
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>

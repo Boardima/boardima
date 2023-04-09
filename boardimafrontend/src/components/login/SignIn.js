@@ -87,7 +87,7 @@ function SignIn() {
             className="signintitle"
             sx={{ fontWeight: "bold", fontSize: "16pt" }}
           >
-            BOARDIMA
+            PERFECT PLACE
           </Typography>
           <Typography className="signintitle">Sign In</Typography>
 
